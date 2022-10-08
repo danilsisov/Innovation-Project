@@ -58,7 +58,7 @@ function createRandomUser(): User { ///generate data for each delivery
 let user_values: User[] = []; // array of objects to store data
 const user = createRandomUser(); //single user (was used for testing)
 
-///data generation:
+///massive data generation:
 Array.from({ length: 10 }).forEach(() => {
   //change length parameter to define the data size, most likely we will have around 70 deliveries per day, we have 943 days -> 66 010 data samples
   user_values.push(createRandomUser());
