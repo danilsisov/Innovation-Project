@@ -1,7 +1,4 @@
-import './styles.css';
-
 import { faker } from '@faker-js/faker';
-import { faker as faker_zh_CN } from '@faker-js/faker/locale/zh_CN';
 
 const fullName = `${faker.name.firstName()} ${faker.name.lastName()}`;
 const avatarUrl = faker.image.avatar();
