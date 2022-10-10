@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="59231243-886a-4f58-8c47-3cd7497e5ca9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/client/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/App.test.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/client/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/logo.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/src/setupTests.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../public/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/App.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/css/App.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/css/map.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/css/navigationBar.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/data.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/map.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/components/navigationBar.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/generate.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/index.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/reportWebVitals.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../yarn.lock" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+        <option value="TypeScript File" />
+        <option value="tsconfig.json" />
+        <option value="CSS File" />
+        <option value="package.json" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2Fde1tGRGImiFlFjSdLbsXTmd1n" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="ts.external.directory.path" value="C:\Users\thaid\OneDrive\Desktop\Data Display Demo\src\node_modules\typescript\lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\thaid\OneDrive\Desktop\Data Display Demo" />
+      <recent name="C:\Users\thaid\OneDrive\Desktop\Data Display Demo\faker-js-test-main\models" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="59231243-886a-4f58-8c47-3cd7497e5ca9" name="Changes" comment="" />
+      <created>1664826178468</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1664826178468</updated>
+      <workItem from="1664826180030" duration="928000" />
+      <workItem from="1664827134493" duration="5055000" />
+      <workItem from="1664890723081" duration="8454000" />
+      <workItem from="1664961671345" duration="5811000" />
+      <workItem from="1664983806137" duration="790000" />
+      <workItem from="1664986261608" duration="54000" />
+      <workItem from="1665219152123" duration="50000" />
+      <workItem from="1665321358957" duration="1063000" />
+      <workItem from="1665325230432" duration="2099000" />
+      <workItem from="1665399009199" duration="599000" />
+      <workItem from="1665406872476" duration="1987000" />
+      <workItem from="1665409609603" duration="5466000" />
+      <workItem from="1665426536940" duration="130000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+    <option name="exactExcludedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/core.js" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/index.js" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/utils.js" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/core.d.ts" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/index.d.ts" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/utils.d.ts" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/core.js.map" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/index.js.map" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/utils.js.map" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/operations.js" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/operations.d.ts" />
+        <option value="$PROJECT_DIR$/server2/node_modules/sift/src/operations.js.map" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+</project>
