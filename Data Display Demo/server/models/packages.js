@@ -1,10 +1,6 @@
 
-<<<<<<< Updated upstream
-const mongoose = require("mongoose");
-=======
 import mongoose from "mongoose";
 
->>>>>>> Stashed changes
 const PackageSchema = new mongoose.Schema({
     //destination coordinates geojson
     //https://stackoverflow.com/questions/28749471/mongoose-schema-for-geojson-coordinates
@@ -39,8 +35,4 @@ const PackageSchema = new mongoose.Schema({
 })
 
 const PackageModel = mongoose.model("packages", PackageSchema);
-<<<<<<< Updated upstream
-module.exports = PackageModel;
-=======
 export default PackageModel;
->>>>>>> Stashed changes
