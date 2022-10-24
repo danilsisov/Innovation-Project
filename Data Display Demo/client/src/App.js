@@ -2,9 +2,6 @@ import './App.css';
 import {useState, useEffect} from "react";
 import Axios from 'axios';
 
-/**
- * TO DO: 50th min of youtube tutorial, figure out how to read data from server side
- * */
 
 function App() {
     const [listOfPackages, setListOfPackages] = useState([]);
@@ -17,7 +14,8 @@ function App() {
 
   return (
     <div className="App">
-      <div className="packagesDisplay">
+
+        <div className="packagesDisplay">
           {listOfPackages.map((package_data) => {
               return <div>
                   <h1>Item ID: {package_data.item_id}</h1>
@@ -29,7 +27,7 @@ function App() {
                   <h2>Status: {package_data.status}</h2>
               </div>
           })}
-      </div>
+        </div>
     </div>
   );
 }
