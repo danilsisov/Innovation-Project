@@ -13,7 +13,49 @@ import * as fs from "fs";
 app.use(express.json());
 app.use(cors());
 
-await mongoose.connect("mongodb+srv://minhdo:SI-E_Metropolia2019.@madd-cluster.d0ozgqq.mongodb.net/packages-database?retryWrites=true&w=majority");
+//insert link here. Removed for safety reasons
+await mongoose.connect("");
+
+/** TO DO:
+ * Add final destination coordinates
+ * Check ETA, calculate road speed and time it takes
+ *
+ * Improve data update
+ * */
+
+//generate new data every 30s
+/*setInterval(seedDB, 1000);*/
+
+//update preexisting data every 20s
+/*setInterval(dataUpdate, 50);*/
+
+//display data of user between dates
+app.get("/findData/:searched_uid/:date1/:date2", async (req, res) => {
+    let searched_uid = req.params.searched_uid,
+        date_from = req.params.date1,
+        date_to = req.params.date2;
+
+    //check packages of specific user or all users at a certain period
+    await DisplayData(res, searched_uid, date_from, date_to);
+})
+
+//export user data from a specific period
+app.post("/dataExport", async (req, res) => {
+    //ideally should get the user id and selected time periods for date
+    let searched_uid = req.body.searched_uid,
+        date_from = req.body.date1,
+        date_to = req.body.date2;
+
+    await exportUserHistory(searched_uid, date_from, date_to);
+})
+
+app.post("/dataExportAll", async (res) => {
+    await exportAllHistory();
+})
+
+app.listen(3001, () => {
+    console.log("Server is running at port 3001");
+});
 
 //add more logic (e.g. if it's unshipped then give it no storage ID)
 //maybe keep everything as unshipped at the start?
@@ -52,6 +94,7 @@ async function seedDB() {
     }
 }
 
+//updates status (there will be more) of package
 async function dataUpdate() {
     let check = Math.floor(Math.random() * 4);
     let updated;
@@ -69,55 +112,38 @@ async function dataUpdate() {
     console.log("Updated case " + check + "\n" + updated)
 }
 
-//generate new data every 30s
-/*setInterval(seedDB, 1000);*/
-
-//update preexisting data every 20s
-/*setInterval(dataUpdate, 50);*/
-
-app.get("/getPackages", (req, res) => {
-    PackageModel.find({}, (err, result) => {
-        if (err) {
-            console.log(err);
-            res.json(err);
-        }
-        else {
-            console.log("Found data");
-            res.json(result);
-        }
-    });
-});
-
-//export test, exports entire database
-/*app.get("/export", async () => {
-    await PackageModel.find().lean().exec((err, data) => {
-        if (err) throw err;
-        const fields = ['item_id', 'client_id'];
-        const parser = new Parser({fields});
-        const csv_data = parser.parse(data);
-        //manually config your location, although I may change it to the PC's download folder
-        fs.writeFile("C:\\Users\\thaid\\OneDrive\\Desktop\\Data Display Demo\\exported.csv", csv_data, function(error) {
-            if (error) throw error;
-            console.log("Exported successfully!");
+async function DisplayData(res, searched_uid, date_from, date_to) {
+    if (searched_uid.toLowerCase() == "all") {
+        await PackageModel.find({
+            date:
+                {
+                    $gt: new Date(0),
+                    $lt: new Date()
+                }
+        }).lean().exec((err, data) => {
+            if (err) res.json(err);
+            else res.json(data);
         });
-    });
-})*/
+    }
 
-app.get("/datesSelect", async (req, res) => {
-  res.send(200);
-})
+    else {
+        await PackageModel.find({
+            client_id: searched_uid,
+            date:
+                {
+                    $gt: new Date(date_from),
+                    $lt: new Date(date_to)
+                }
+        }).lean().exec((err, data) => {
+            if (err) res.json(err);
+            else res.json(data);
+        });
+    }
+}
 
-//testing for export
-app.post("/datesSelect", async (req, res) => {
-    //ideally should get the user id and selected time periods for date
-    let searched_uid = req.body.searched_uid,
-        date_from = req.body.date1,
-        date_to = req.body.date2;
-
+async function exportUserHistory(searched_uid, date_from, date_to) {
     await PackageModel.find({
-        //adjust item id, test for now
         client_id: searched_uid,
-        //pass the dates as query!!! also ensure date1 < date2
         date:
             {
                 $gt: new Date(date_from),
@@ -125,20 +151,33 @@ app.post("/datesSelect", async (req, res) => {
             }
     }).lean().exec((err, data) => {
         if (err) throw err;
-        //use all the fields
         const fields = ['client_id', 'item_id', 'status', 'date'];
         const parser = new Parser({fields});
         const csv_data = parser.parse(data);
-        //manually config your location, although I may change it to the PC's download folder
-        fs.writeFile("C:\\Users\\thaid\\OneDrive\\Documents\\GitHub\\Innovation-Project\\Data Display Demo\\exported.csv", csv_data, function(error) {
+        //try to change it to the local PC's download folder
+        fs.writeFile("C:\\Users\\thaid\\OneDrive\\Desktop\\Data Display Demo\\"+searched_uid+"_"+date_from+"_"+date_to+".csv", csv_data, function(error) {
             if (error) throw error;
-            console.log("Exported successfully!");
         });
     });
-    res.status(200);
-    console.log("Exported data of" + searched_uid + " from " + date_from + " to " + date_to)
-})
+}
 
-app.listen(3001, () => {
-    console.log("Server is running at port 3001");
-});
+//exports all data
+async function exportAllHistory() {
+    await PackageModel.find({
+        date:
+            {
+                $gt: new Date(0),
+                $lt: new Date()
+            }
+    }).lean().exec((err, data) => {
+        if (err) throw err;
+        //add more fields if needed
+        const fields = ['client_id', 'item_id', 'status', 'date'];
+        const parser = new Parser({fields});
+        const csv_data = parser.parse(data);
+        //try to change it to the local PC's download folder
+        fs.writeFile("C:\\Users\\thaid\\OneDrive\\Desktop\\Data Display Demo\\exportedAll.csv", csv_data, function(error) {
+            if (error) throw error;
+        });
+    });
+}
