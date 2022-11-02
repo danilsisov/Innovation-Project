@@ -31,19 +31,6 @@ const time = faker.date.between(
   '2023-03-01T00:00:00.000Z'
 );
 
-/*export const USERS: User[] = [];
-
-export function lulz(): User {
-  return {
-    userId: faker.datatype.uuid(),
-    username: faker.internet.userName(),
-    email: faker.internet.email(),
-    password: faker.internet.password(),
-    birthdate: faker.date.birthdate(),
-    registeredAt: faker.date.past(),
-  };
-}
-*/
 
 let users_list: String[] = [];
 
@@ -53,23 +40,47 @@ Array.from({ length: 10 }).forEach(() => {
 });
 
 
-function dist (x1,y1,x2,y2){
-    return Math.sqrt(Math.pow( x1-x2, 2) + Math.pow( y1-y2, 2))
+///function to calculate distance in km between two coordinate points on the map
+
+function distance(lat1, lon1, lat2, lon2) {
+	if ((lat1 == lat2) && (lon1 == lon2)) {
+		return 0;
+	}
+	else {
+		var radlat1 = Math.PI * lat1/180;
+		var radlat2 = Math.PI * lat2/180;
+		var theta = lon1-lon2;
+		var radtheta = Math.PI * theta/180;
+		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		if (dist > 1) {
+			dist = 1;
+		}
+		dist = Math.acos(dist);
+		dist = dist * 180/Math.PI;
+		dist = dist * 60 * 1.1515;
+		return dist * 1.609344; ///return in km
+	}
 }
 
 class User {}
 
 function createRandomUser(): User {
+  let x1 = faker.address.nearbyGPSCoordinate(
+    [60.250690, 24.902729], 
+    5,
+    true
+  )[0];
+  let y1 = faker.address.nearbyGPSCoordinate(
+    [60.250690, 24.902729], 
+    5,
+    true
+  )[1];
   return {
     storage_id: faker.helpers.arrayElement(['Storage A', 'Storage B']),
     price: faker.finance.amount(),
     Item_ID: faker.internet.password(),
     Item_name: faker.commerce.product(),
-    User_address: faker.address.nearbyGPSCoordinate(
-      [60.250690, 24.902729], 
-      5,
-      true
-    ), // 20 km area from the center of Helsinki (most likely need to change city as Helsinki is close to water)
+    User_address: [x1,y1], 
     Client_ID: users_list[Math.floor(Math.random() * users_list.length)], //maybe limit options??? Otherwise all users will be unique
     time: faker.date.between(
       '2020-08-01T00:00:00.000Z',
@@ -78,12 +89,16 @@ function createRandomUser(): User {
     status: faker.helpers.arrayElement(['On the way', 'Delivered']),
     // can also add names of users, zipcode, email, properties of package (size,weight...), also can add avatar picture
     // need to think of time it took to deliver
+    dist_in_km: distance(60.250690, 24.902729, x1, y1),
+    delivery_time_in_mins: (((distance(60.250690, 24.902729, x1, y1))/30)*60)+ Math.floor((Math.random() * 20) + 1),
   };
 }
 
+const user = createRandomUser(); //single user (was used for testing)
+
+
 
 let user_values: User[] = []; // array of objects to store data
-const user = createRandomUser(); //single user (was used for testing)
 
 Array.from({ length: 10 }).forEach(() => {
   //change length parameter to define the data size, most likely we will have around 70 deliveries per day, we have 943 days -> 66 010 data samples
@@ -91,7 +106,7 @@ Array.from({ length: 10 }).forEach(() => {
 });
 
 
-let delivery_time = dist(60.250690, 24.902729, user_values[0].User_address[0], user_values[0].User_address[1])/30;
+
 
 
 
@@ -135,9 +150,12 @@ appDiv.innerHTML = `
     <p>
     user coords: ${user_values[0].User_address}
     <p>
-    dist: ${dist(60.250690, 24.902729, user_values[0].User_address[0], user_values[0].User_address[1])}
+    line converted: ${distance(60.250690, 24.902729, user_values[0].User_address[0], user_values[0].User_address[1])}
     <p>
-    dist2: ${delivery_time}
+    dist from class: ${user_values[0].dist_in_km}
+    <p>
+    deliv time : ${user_values[0].delivery_time_in_mins}
+    <p>
   </div>  
 </div>
 `;
