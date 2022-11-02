@@ -42,16 +42,16 @@ Array.from({ length: 10 }).forEach(() => {
 
 ///function to calculate distance in km between two coordinate points on the map
 
-function distance(lat1, lon1, lat2, lon2) {
-	if ((lat1 == lat2) && (lon1 == lon2)) {
+function distance(x1, y1, x2, y2) {
+	if ((x1 == x2) && (y1 == y2)) {
 		return 0;
 	}
 	else {
-		var radlat1 = Math.PI * lat1/180;
-		var radlat2 = Math.PI * lat2/180;
-		var theta = lon1-lon2;
+		var radx1 = Math.PI * x1/180;
+		var radx2 = Math.PI * x2/180;
+		var theta = y1-y2;
 		var radtheta = Math.PI * theta/180;
-		var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+		var dist = Math.sin(radx1) * Math.sin(radx2) + Math.cos(radx1) * Math.cos(radx2) * Math.cos(radtheta);
 		if (dist > 1) {
 			dist = 1;
 		}
