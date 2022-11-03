@@ -1,11 +1,8 @@
-
 import mongoose from "mongoose";
 
 const PackageSchema = new mongoose.Schema({
-    //destination coordinates geojson
-    //https://stackoverflow.com/questions/28749471/mongoose-schema-for-geojson-coordinates
     geometry: {
-        location_coords: { type: [Number], index: '2dsphere'},
+        user_address: { type: [Number], index: '2dsphere'}
     },
     item_id: {
         type: String,
@@ -15,23 +12,30 @@ const PackageSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    storage_id: {
+        type: String,
+        required: true
+    },/*
+    location_id: {
+        type: String,
+        required: true
+    },*/
+    status: {
+        type: String,
+        default: "Delivery not started"
+    },
+    dist_in_km: {
+        type: Number,
+        required: true
+    },
+    delivery_time_in_mins: {
+        type: Number,
+        required: true
+    },
     date: {
         type: Date,
         default: new Date().toLocaleDateString("en-US")
     },
-    //either locker number or user's home
-    storage_id: {
-        type: String
-    },
-    //either postal office or user's home
-    location_id: {
-        type: String,
-        required: true
-    },
-    status: {
-        type: String,
-        default: "Delivery not started"
-    }
 })
 
 const PackageModel = mongoose.model("packages", PackageSchema);
