@@ -9,7 +9,8 @@ import * as databaseHandler from "./databaseHandler.js"
 
 app.use(express.json());
 app.use(cors());
-await mongoose.connect("mongodb+srv://minhdo:SI-E_Metropolia2019.@madd-cluster.d0ozgqq.mongodb.net/packages-database?retryWrites=true&w=majority");
+//insert mongodb link down here
+await mongoose.connect("");
 
 /** TO DO:
  * Add final destination coordinates
