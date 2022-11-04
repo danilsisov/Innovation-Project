@@ -12,13 +12,13 @@ export async function dataUpdate() {
     let updated;
     switch (check) {
         case 0:
-            updated = await PackageModel.findOneAndUpdate({status: "Unshipped"} , {status: "Sorting"}).skip(randomizer);
+            updated = await PackageModel.findOneAndUpdate({status: "Unshipped"} , {status: "Sorting"});
         case 1:
-            updated = await PackageModel.findOneAndUpdate({status: "Sorting"} , {status: "On the way"}).skip(randomizer);
+            updated = await PackageModel.findOneAndUpdate({status: "Sorting"} , {status: "On the way"});
         case 2: //in case it goes through another checkpoint
-            updated = await PackageModel.findOneAndUpdate({status: "On the way"} , {status: "Sorting"}).skip(randomizer);
+            updated = await PackageModel.findOneAndUpdate({status: "On the way"} , {status: "Sorting"});
         case 3:
-            updated = await PackageModel.findOneAndUpdate({status: "On the way"} , {status: "Delivered"}).skip(randomizer);
+            updated = await PackageModel.findOneAndUpdate({status: "On the way"} , {status: "Delivered"});
     }
     console.log("Updated case " + check + "\n" + updated)
 }
