@@ -68,3 +68,12 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+
+
+
+
+
+Data generator:
+
+In order to simulate delivery processes, our projects requires massive amount of data. For this reason a data generator was developed. It is written in TypeScript and the main library used is Faker.js. Delivery is represented as a class, for each single delivery a class object gets created with all necessary information including Delivery satus, storage id, customer id, customers co-ordinates, item id and date&time of the delivery. 
