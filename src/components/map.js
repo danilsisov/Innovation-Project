@@ -1,30 +1,44 @@
-import React, { useRef, useEffect, useState } from "react";
-import maplibregl from "maplibre-gl";
-import Map from "react-map-gl";
+import React, { useRef, useEffect } from "react";
+import mapboxgl from "mapbox-gl";
+import 'mapbox-gl/dist/mapbox-gl.css'
 import "./css/map.css";
-import MapLibreGlDirections, { LoadingIndicatorControl } from "@maplibre/maplibre-gl-directions";
+import geoJson from "./data/test.json"
 
-export default function ReactMap() {
-  const [API_KEY] = useState("delrl8nqQPw0Fe3Yq5Rb");
+//Mapbox token
+mapboxgl.accessToken = "pk.eyJ1IjoiZGFuaWxzaDQiLCJhIjoiY2xhNW5tOGp1MWI5NTN3bWJ4eHdvb2FmcCJ9.oKU58CmaweO00XNcQUu3MQ";
 
-  const [mapViewport, map] = useState({
-    longitude: 24.937086,
-    latitude: 60.1865450,
-    zoom: 11,
-    minZoom: 2,
-    maxPitch: 68
-  });
-  
+const MainMap = () => {
+  const mapContainerRef = useRef(null);
 
-  return (
-    <div className="map-wrap">
-      <Map
-        initialViewState={{ ...mapViewport }}
-        mapStyle={`https://api.maptiler.com/maps/streets/style.json?key=${API_KEY}`}
-        mapLib={maplibregl}
-        className="map"
-      >
-      </Map>
-    </div>
-  );
-}
+  // Initialize map when component mounts
+  useEffect(() => {
+    const map = new mapboxgl.Map({
+      container: mapContainerRef.current,
+      style: "mapbox://styles/danilsh4/cla5nphbi002f14l7kiw5assi",
+      center: [24.9370865, 60.1865450],
+      zoom: 10,
+      maxPitch: 75
+    });
+
+    // Station markers from json
+    geoJson.features.map((feature) =>
+      new mapboxgl.Marker().setLngLat(feature.geometry.coordinates).addTo(map)
+    );
+
+    //Deafault red marker
+    new mapboxgl.Marker({"color" : "#b40219"})
+        .setLngLat([24.758151, 60.224129])
+        .addTo(map)
+
+    // Add navigation control (the +/- zoom buttons)
+    map.addControl(new mapboxgl.NavigationControl(), "top-right");
+
+
+    // Clean up on unmount
+    return () => map.remove();
+  }, []);
+
+  return <div className="map-container" ref={mapContainerRef} />;
+};
+
+export default MainMap;
