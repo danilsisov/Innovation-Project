@@ -3,28 +3,40 @@ import PackageModel from "../models/packages.js";
 import {Parser} from "json2csv";
 import fs from "fs";
 
-setInterval(dataUpdate, 10000);
+/*setInterval(dataUpdate, 2000);*/
 
-//update preexisting data in intervals. check if you can improve
+//update location also!
 export async function dataUpdate() {
-    let check = Math.floor(Math.random() * 4);
-    let randomizer = Math.floor(Math.random() * await PackageModel.countDocuments());
+    let check = Math.floor(Math.random() * 3);
     let updated;
     switch (check) {
         case 0:
-            updated = await PackageModel.findOneAndUpdate({status: "Unshipped"} , {status: "Sorting"});
+            updated = await PackageModel.findOneAndUpdate(
+                {status: "Unshipped"} , {status: "Sorting", date: new Date()}
+            ).then((result)=> {
+                console.log("Updated case " + check + " of package " + result.item_id)
+            });
+            break;
         case 1:
-            updated = await PackageModel.findOneAndUpdate({status: "Sorting"} , {status: "On the way"});
+            updated = await PackageModel.findOneAndUpdate(
+                {status: "Sorting"} , {status: "On the way", date: new Date()}
+            ).then((result)=> {
+                console.log("Updated case " + check + " of package " + result.item_id)
+            });
+            break;
         case 2: //in case it goes through another checkpoint
-            updated = await PackageModel.findOneAndUpdate({status: "On the way"} , {status: "Sorting"});
-        case 3:
-            updated = await PackageModel.findOneAndUpdate({status: "On the way"} , {status: "Delivered"});
+            updated = await PackageModel.findOneAndUpdate(
+                {status: "On the way"} , {status: "Delivered", date: new Date()}
+            ).then((result)=> {
+                console.log("Updated case " + check + " of package " + result.item_id)
+            });
+            break;
+        //maybe add case for delivery problems
     }
-    console.log("Updated case " + check + "\n" + updated)
 }
 
-export async function DisplayData(res, searched_uid, date_from, date_to) {
-    if (searched_uid.toLowerCase() == "all") {
+export async function DisplayUserData(res, userid, date_from, date_to) {
+    if (userid.toLowerCase() == "all") {
         await PackageModel.find({
             date:
                 {
@@ -39,7 +51,7 @@ export async function DisplayData(res, searched_uid, date_from, date_to) {
 
     else {
         await PackageModel.find({
-            client_id: searched_uid,
+            client_id: userid,
             date:
                 {
                     $gt: new Date(date_from),
@@ -51,6 +63,16 @@ export async function DisplayData(res, searched_uid, date_from, date_to) {
         });
     }
 }
+
+export async function DisplayPackageData(res, package_id) {
+    await PackageModel.find({
+        item_id: package_id
+    }).lean().exec((err, data) => {
+        if (err) res.json(err);
+        else res.json(data);
+    });
+}
+
 
 export async function exportUserHistory(searched_uid, date_from, date_to) {
     await PackageModel.find({
@@ -71,6 +93,19 @@ export async function exportUserHistory(searched_uid, date_from, date_to) {
         });
     });
 }
+
+export async function DisplayPackageLocation(res, package_id) {
+
+    await PackageModel.find({
+        item_id: package_id
+    }).lean().exec((err, data) => {
+        if (err) res.json(err);
+        else res.json(data);
+
+    });
+}
+
+
 
 //exports all data, admin rights only
 export async function exportAllHistory() {

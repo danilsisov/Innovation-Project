@@ -1,8 +1,17 @@
 import mongoose from "mongoose";
 
 const PackageSchema = new mongoose.Schema({
-    geometry: {
-        user_address: { type: [Number], index: '2dsphere'}
+    location: {
+        type: {
+            type: String,
+            enum: ['Point'],
+            required: true
+        },
+        coordinates: {
+            type: [Number],
+            index: '2dsphere',
+            required: true
+        }
     },
     item_id: {
         type: String,
@@ -15,11 +24,7 @@ const PackageSchema = new mongoose.Schema({
     storage_id: {
         type: String,
         required: true
-    },/*
-    location_id: {
-        type: String,
-        required: true
-    },*/
+    },
     status: {
         type: String,
         default: "Delivery not started"
