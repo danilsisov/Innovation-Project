@@ -6,11 +6,11 @@ import UserModel from "../models/users.js";
 
 //generate new data
 
-setInterval(createRandomUser, 20000);
+/*setInterval(createRandomUser, 5000);
 
-setInterval(createPackage, 10000);
+setInterval(createPackage, 2000);*/
 
-async function createRandomUser() {
+export async function createRandomUser() {
     let newUser = {
         user_id: faker.datatype.uuid()
     }
@@ -19,30 +19,23 @@ async function createRandomUser() {
     console.log("Generated new user");
 }
 
-async function createPackage() {
-    let x1 = faker.address.nearbyGPSCoordinate(
-        [60.250690, 24.902729],
-        5,
-        true
-    )[0];
-    let y1 = faker.address.nearbyGPSCoordinate(
-        [60.250690, 24.902729],
-        5,
-        true
-    )[1];
+export async function createPackage() {
+    let x1 = coordinatesGenerator(0),
+        y1 = coordinatesGenerator(1);
     try {
-        //pick a random user from the database
+        //helps pick a random user from the database
         let randomizer = Math.floor(Math.random() * await UserModel.countDocuments());
         let newPackage = {
-            geometry: {
-                user_address: [x1, y1]
+            location: {
+                type: 'Point',
+                coordinates: [x1, y1]
             },
             item_id: faker.internet.password(),
             client_id: await UserModel.findOne().skip(randomizer).then((result) => {
                 return (result.user_id);
             }),
             storage_id: faker.helpers.arrayElement(['Storage A', 'Storage B']),
-            status: faker.helpers.arrayElement(['Unshipped', 'Sorting', 'On the way', 'Delivered']),
+            status: faker.helpers.arrayElement(['Unshipped', 'Sorting'/*, 'On the way', 'Delivered'*/]),
             dist_in_km: distance(60.250690, 24.902729, x1, y1),
             delivery_time_in_mins: (((distance(60.250690, 24.902729, x1, y1))/30)*60)+ Math.floor((Math.random() * 20) + 1),
             date: faker.date.between(
@@ -80,3 +73,10 @@ function distance(x1, y1, x2, y2) {
     }
 }
 
+function coordinatesGenerator(index) {
+    return faker.address.nearbyGPSCoordinate(
+        [60.250690, 24.902729],
+        5,
+        true
+    )[index];
+}
