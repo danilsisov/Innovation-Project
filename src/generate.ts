@@ -1,7 +1,6 @@
 /// Install faker js using: 
 /// npm install @faker-js/faker --save-dev
 
-
 import { faker } from '@faker-js/faker';
 import { faker as faker_zh_CN } from '@faker-js/faker/locale/zh_CN';
 
@@ -31,6 +30,43 @@ const time = faker.date.between(
   '2023-03-01T00:00:00.000Z'
 );
 
+function just_time(timestamp){  //take Date object and extract time out of it
+  let time: string = timestamp.toString() //convert from date type to string
+  return time.substr(16,8); //extract and return time
+}
+
+
+
+let time2 = time.toDateString(); 
+
+
+//from 9 till 11
+let time_period1 = faker.date.between(  
+  '2020-08-01T09:00:00.000',
+  '2020-08-01T11:00:00.000'
+);
+
+//from 12 to 16
+let time_period2 = faker.date.between( 
+  '2020-08-01T12:00:00.000',
+  '2020-08-01T16:00:00.000'
+);
+
+
+
+const tp = faker.helpers.arrayElement([faker.date.between( 
+  '2020-08-01T12:00:00.000',
+  '2020-08-01T16:00:00.000'
+), faker.date.between(  
+  '2020-08-01T09:00:00.000',
+  '2020-08-01T11:00:00.000'
+)]);
+
+
+
+
+
+
 
 let users_list: String[] = [];
 
@@ -38,6 +74,8 @@ Array.from({ length: 10 }).forEach(() => {
   //Array contains n number of unique user id values, this must be done to ensure that orders from users repeat
   users_list.push(faker.datatype.uuid());
 });
+
+
 
 
 ///function to calculate distance in km between two coordinate points on the map
@@ -75,6 +113,13 @@ function createRandomUser(): User {
     5,
     true
   )[1];
+  let deliv_time = faker.helpers.arrayElement([faker.date.between( 
+    '2020-08-01T12:00:00.000',
+    '2020-08-01T16:00:00.000'
+  ), faker.date.between(  
+    '2020-08-01T09:00:00.000',
+    '2020-08-01T11:00:00.000'
+  )]);
   return {
     storage_id: faker.helpers.arrayElement(['Storage A', 'Storage B']),
     price: faker.finance.amount(),
@@ -85,7 +130,7 @@ function createRandomUser(): User {
     time: faker.date.between(
       '2020-08-01T00:00:00.000Z',
       '2023-03-01T00:00:00.000Z'
-    ),
+    ).toDateString().concat(" ",just_time(deliv_time).toString()),
     status: faker.helpers.arrayElement(['On the way', 'Delivered']),
     // can also add names of users, zipcode, email, properties of package (size,weight...), also can add avatar picture
     // need to think of time it took to deliver
@@ -156,6 +201,15 @@ appDiv.innerHTML = `
     <p>
     deliv time : ${user_values[0].delivery_time_in_mins}
     <p>
+    Time period1: ${time_period1.toDateString()}
+    <p>
+    Time2: ${time2} 
+    <p>
+    Time per after function: ${just_time(time_period1)}
+    <p>
+    TP: ${tp}
+    <p>
+    
   </div>  
 </div>
 `;
