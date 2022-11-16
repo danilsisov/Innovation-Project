@@ -3,7 +3,6 @@ import {useState} from "react";
 import Axios from 'axios';
 import NavigationBar from "./components/navigationBar.js";
 import ReactMap from "./components/map.js";
-const fs = require('fs');
 
 function App() {
     const [listOfPackages, setListOfPackages] = useState([]);
@@ -87,22 +86,28 @@ function App() {
                 <div className="formInput">
                     <form onSubmit={DisplayUserData}>
                         <div className='dateInput'>
-                            <label htmlFor="user_id">User ID:</label>
+                            <p></p>
+                            <label htmlFor="user_id"><strong>&nbsp; User ID: </strong></label>
                             <input type="text" id="user_id" name="user_id" required></input>
-                            <label htmlFor="name">From:</label>
+                            <label htmlFor="name"> <strong>&nbsp;&nbsp;&nbsp;  From:  </strong></label>
                             <input type="date" id="date_input1" name="date_input1" required/>
-                            <label htmlFor="name">To:</label>
+                            <label htmlFor="name"> <strong>&nbsp;&nbsp;&nbsp; To: </strong></label>
                             <input type="date" id="date_input2" name="date_input2" required/>
+                            <p></p>
                             <input type="submit" id="display" name="display" value="Display"/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="submit" value="Export Data" onClick={dataExportUser}/>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <input type="submit" value="Export Entire Database" onClick={dataExportAll}/>
                         </div>
                     </form>
                     <form onSubmit={DisplayPackageData}>
                         <div className='dateInput'>
-                            <label htmlFor="package_id">Package ID:</label>
+                            <p></p>
+                            <label htmlFor="package_id"><strong>Package ID: </strong></label>
                             <input type="text" id="package_id" name="package_id" required></input>
                             <input type="submit" id="display" name="display" value="Display"/>
+                            <hr size="3" width="110%" color="black"></hr>
                         </div>
                     </form>
                     {listOfPackages.map((package_data) => {

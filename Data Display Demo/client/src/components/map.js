@@ -31,8 +31,10 @@ const MainMap = () => {
         .setLngLat([24.758151, 60.224129])
         .addTo(map)
 
-    // Add navigation control (the +/- zoom buttons)
+    //Navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
+    
+    //Online traffic 
     map.addControl(new MapboxTraffic());
 
     // Clean up on unmount
