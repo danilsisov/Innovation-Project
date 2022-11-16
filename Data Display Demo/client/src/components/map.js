@@ -31,12 +31,15 @@ const MainMap = () => {
         .setLngLat([24.758151, 60.224129])
         .addTo(map)
 
-    //Navigation control (the +/- zoom buttons)
+    // Add navigation control (the +/- zoom buttons)
     map.addControl(new mapboxgl.NavigationControl(), "top-right");
-    
-    //Online traffic 
-    map.addControl(new MapboxTraffic());
 
+    // Add traffic flow toggle
+    map.addControl(new MapboxTraffic());
+    
+    // Add full screen toggle to make the map fullscreen
+    map.addControl(new mapboxgl.FullscreenControl());
+    
     // Clean up on unmount
     return () => map.remove();
   }, []);

@@ -1,9 +1,9 @@
 .map-container {
   float: right;
   right: 0%;
-  width: 50%;
+  width: 45%;
   height: calc(
-    100vh - 10px
+    100vh - 15px
   ); /* calculate height of the screen minus the heading */
 }
 
