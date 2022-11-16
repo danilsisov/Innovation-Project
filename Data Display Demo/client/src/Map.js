@@ -1,19 +1,21 @@
-import './Map.css';
+import {useEffect} from "react";
 import * as maplibregl from "maplibre-gl";
 import * as arcgisRest1 from "@esri/arcgis-rest-request";
 import * as arcgisRest2 from "@esri/arcgis-rest-routing";
-import {useEffect} from "react";
+import './Map.css';
 
 function Map() {
     useEffect(() => {
         const apiKey = "AAPKcb0d68045f30492aa85ec2488ca8240cQNND0CXrHDscoALO9gyHHLacMEgD6YuZ_Vxt3GS3gu5brdqCNBqm2R1CnyQrgPW9";
         const basemapEnum = "ArcGIS:Navigation";
+
         const map = new maplibregl.Map({
             container: "map",
             style: `https://basemaps-api.arcgis.com/arcgis/rest/services/styles/${basemapEnum}?type=style&token=${apiKey}`,
             zoom: 5,
             center: [2.3522, 48.8566]
         });
+
         let link_mapcss = document.createElement('link');
         link_mapcss.href = "https://unpkg.com/maplibre-gl@2.1.9/dist/maplibre-gl.css";
         link_mapcss.async = true;
@@ -26,7 +28,7 @@ function Map() {
                     type: "FeatureCollection",
                     features: []
                 }
-            });
+            });           
             map.addSource("end", {
                 type: "geojson",
                 data: {
@@ -34,7 +36,6 @@ function Map() {
                     features: []
                 }
             });
-
             map.addLayer({
                 id: "start-circle",
                 type: "circle",
@@ -46,7 +47,6 @@ function Map() {
                     "circle-stroke-width": 2
                 }
             });
-
             map.addLayer({
                 id: "end-circle",
                 type: "circle",
@@ -56,7 +56,6 @@ function Map() {
                     "circle-color": "black"
                 }
             });
-
         }
 
         function addRouteLayer() {
@@ -67,7 +66,6 @@ function Map() {
                     features: []
                 }
             });
-
             map.addLayer({
                 id: "route-line",
                 type: "line",
@@ -99,9 +97,7 @@ function Map() {
             addRouteLayer();
         });
 
-        let currentStep = "start";
         let startCoords, endCoords;
-
         startCoords = [2.3522, 48.8566];
         endCoords = [5.3698, 43.2965]
 

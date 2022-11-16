@@ -5,7 +5,6 @@ import NavigationBar from "./components/navigationBar.js";
 import ReactMap from "./components/map.js";
 const fs = require('fs');
 
-
 function App() {
     const [listOfPackages, setListOfPackages] = useState([]);
     let dateInput1, dateInput2, userInput, packageInput,Currentlongitude,Currentlatitude;
@@ -25,9 +24,9 @@ function App() {
         packageInput = document.getElementById('package_id').value;
         await Axios.get("http://localhost:3001/findData/"+packageInput, {})
             .then((response) => {
-            setListOfPackages(response.data);
-            
+            setListOfPackages(response.data);         
         })
+
         var config = {
             method: 'patch',
             url: 'http://localhost:3001/showPackagelocation/'+packageInput,
@@ -45,24 +44,12 @@ function App() {
           })
           .catch( (error) =>{
             console.log(error);
-          });
-
-
-
-
-
-
-          
+          }); 
       /* await Axios.patch("http://localhost:3001/showPackageOnMap/"+packageInput, {})
-            .then((response) => {
-                
+            .then((response) => {      
             })
         //send axios get to update json file. should it be post instead?  */
     } 
-
-
-
-
 
     function dataExportUser(e) {
         e.preventDefault();
