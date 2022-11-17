@@ -23,7 +23,7 @@ const addr2 = faker.address.nearbyGPSCoordinate(
 
 const zip = faker.address.zipCode();
 const statezip = faker.address.zipCodeByState('AK');
-const storage = faker.helpers.arrayElement(['a', 'b']);
+//const storage = faker.helpers.arrayElement(['a', 'b']);
 const status = faker.helpers.arrayElement(['On the way', 'Delivered']);
 const time = faker.date.between(
   '2020-08-01T00:00:00.000Z',
@@ -100,6 +100,8 @@ function distance(x1, y1, x2, y2) {
 	}
 }
 
+
+
 class User {}
 
 function createRandomUser(): User {
@@ -113,6 +115,9 @@ function createRandomUser(): User {
     5,
     true
   )[1];
+  let coord1 = []
+  coord1.push(x1,y1,'Storage A')
+  
   let deliv_time = faker.helpers.arrayElement([faker.date.between( 
     '2020-08-01T12:00:00.000',
     '2020-08-01T16:00:00.000'
@@ -120,12 +125,40 @@ function createRandomUser(): User {
     '2020-08-01T09:00:00.000',
     '2020-08-01T11:00:00.000'
   )]);
+  let st_2x1 = faker.address.nearbyGPSCoordinate(
+    [60.249280, 25.048008], 
+    3,
+    true
+  )[0];
+  let st_2y1 = faker.address.nearbyGPSCoordinate(
+    [60.249280, 25.048008], 
+    3,
+    true
+  )[1];
+  
+  let coord2 = []
+  coord2.push(st_2x1, st_2y1, 'Storage B')
+  let st_3x1 = faker.address.nearbyGPSCoordinate(
+    [60.206252, 24.937641], 
+    1,
+    true
+  )[0];
+  let st_3y1 = faker.address.nearbyGPSCoordinate(
+    [60.206252, 24.937641], 
+    1,
+    true
+  )[1];
+  let coord3 = []
+  coord3.push(st_3x1, st_3y1, 'Storage C')
+
+  let final_address = faker.helpers.arrayElement([coord1, coord2, coord3]);
+  
   return {
-    storage_id: faker.helpers.arrayElement(['Storage A', 'Storage B']),
+    storage_id: final_address[2],//faker.helpers.arrayElement(['Storage A', 'Storage B', 'Storage C']),
     price: faker.finance.amount(),
     Item_ID: faker.internet.password(),
     Item_name: faker.commerce.product(),
-    User_address: [x1,y1], 
+    User_address: [final_address[0],final_address[1]], 
     Client_ID: users_list[Math.floor(Math.random() * users_list.length)], //maybe limit options??? Otherwise all users will be unique
     time: faker.date.between(
       '2020-08-01T00:00:00.000Z',
@@ -183,7 +216,6 @@ appDiv.innerHTML = `
     address: ${addr}
     specified address ${addr2}
     State zip: ${statezip}
-    Storage id: ${storage}
     User: ${user_values[1].price}
     User: ${user_values[2].price}
     User: ${user_values[3].price}
@@ -209,7 +241,12 @@ appDiv.innerHTML = `
     <p>
     TP: ${tp}
     <p>
-    
+    final time : ${user_values[0].time}
+    <p>
+    address: ${user_values[0].User_address}
+    <p>
+    storage: ${user_values[0].storage_id}
+    <p>
   </div>  
 </div>
 `;
