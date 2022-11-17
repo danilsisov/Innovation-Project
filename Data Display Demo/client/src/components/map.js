@@ -37,6 +37,9 @@ const MainMap = () => {
     //Online traffic 
     map.addControl(new MapboxTraffic());
 
+    // Add full screen toggle to make the map fullscreen
+    map.addControl(new mapboxgl.FullscreenControl());
+
     // Clean up on unmount
     return () => map.remove();
   }, []);
