@@ -26,9 +26,15 @@ const MainMap = () => {
       new mapboxgl.Marker().setLngLat(feature.geometry.coordinates).addTo(map)
     );
 
-    //Deafault red marker
+    //Default red markers, represent storages A B C
     new mapboxgl.Marker({"color" : "#b40219"})
-        .setLngLat([24.758151, 60.224129])
+        .setLngLat([24.902729, 60.250690])
+        .addTo(map)
+    new mapboxgl.Marker({"color" : "#b40219"})
+        .setLngLat([25.048008, 60.249280])
+        .addTo(map)
+    new mapboxgl.Marker({"color" : "#b40219"})
+        .setLngLat([24.937641, 60.206252])
         .addTo(map)
 
     //Navigation control (the +/- zoom buttons)

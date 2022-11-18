@@ -1,3 +1,0 @@
-# Innovation-Project
-
-Madd Team

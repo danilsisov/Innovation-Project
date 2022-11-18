@@ -1,6 +1,14 @@
 import mongoose from "mongoose";
 
 const PackageSchema = new mongoose.Schema({
+    item_id: {
+        type: String,
+        required: true
+    },
+    client_id: {
+        type: String,
+        required: true
+    },
     location: {
         type: {
             type: String,
@@ -12,14 +20,6 @@ const PackageSchema = new mongoose.Schema({
             index: '2dsphere',
             required: true
         }
-    },
-    item_id: {
-        type: String,
-        required: true
-    },
-    client_id: {
-        type: String,
-        required: true
     },
     storage_id: {
         type: String,
